@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govt. Primary School Jada Chandia (EMIS: 32330121)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Slider Styles */
+        .slider-container { position: relative; max-width: 100%; height: 450px; overflow: hidden; background: #065f46; }
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide.active { display: block; opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); }
+        .slide-caption { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.7); color: #fff; padding: 12px 24px; border-radius: 8px; text-align: center; }
+        /* Dropdown Styles */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; background-color: #ffffff; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.1); z-index: 50; border-radius: 6px; top: 100%; left: 0; }
+        .dropdown-content a { color: #374151; padding: 10px 16px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid #f3f4f6; }
+        .dropdown-content a:hover { background-color: #ecfdf5; color: #065f46; }
+        .dropdown:hover .dropdown-content { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Top Ticker Bar (Green Line with Right-to-Left Moving Events & News) -->
+    <div class="bg-emerald-900 text-white text-xs sm:text-sm py-2 px-4 flex items-center overflow-hidden border-b border-emerald-800">
+        <div class="bg-yellow-400 text-emerald-950 font-bold px-2 py-0.5 rounded text-xs mr-3 shrink-0 z-10 shadow">
+            <i class="fa-solid fa-bullhorn mr-1"></i> UPDATES:
+        </div>
+        <div class="overflow-hidden whitespace-nowrap w-full">
+            <marquee behavior="scroll" direction="left" scrollamount="5" class="text-emerald-100 font-medium">
+                <span class="mx-4"><i class="fa-solid fa-calendar-days text-yellow-300 mr-1"></i> Upcoming Event: Annual Sports Week starting next Monday!</span> &bull; 
+                <span class="mx-4"><i class="fa-solid fa-circle-exclamation text-yellow-300 mr-1"></i> Notice: Mid-Term Examination Roll Number Slips have been issued.</span> &bull; 
+                <span class="mx-4"><i class="fa-solid fa-graduation-cap text-yellow-300 mr-1"></i> Welcome to Govt. Primary School Jada Chandia (EMIS Code: 32330121) Official Portal</span> &bull; 
+                <span class="mx-4"><i class="fa-solid fa-users text-yellow-300 mr-1"></i> Parent-Teacher Meeting (PTM) scheduled for this Saturday.</span>
+            </marquee>
+        </div>
+    </div>
+
+    <!-- Header & Navigation Bar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-emerald-700 text-white p-2.5 rounded-full text-lg font-bold">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold text-emerald-900 leading-tight">Govt. Primary School Jada Chandia</h1>
+                    <p class="text-xs text-gray-500">Government of Punjab Education Department (EMIS: 32330121)</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-6 font-medium text-gray-700">
+                <a href="#home" class="hover:text-emerald-700 transition">Home</a>
+                
+                <!-- About School Dropdown -->
+                <div class="dropdown">
+                    <a href="#about" class="hover:text-emerald-700 transition flex items-center gap-1 py-2">
+                        About School <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#history"><i class="fa-solid fa-landmark mr-2 text-emerald-700"></i> School History</a>
+                        <a href="#results"><i class="fa-solid fa-square-poll-vertical mr-2 text-emerald-700"></i> Annual Results</a>
+                        <a href="#teachers"><i class="fa-solid fa-chalkboard-user mr-2 text-emerald-700"></i> Teachers & Qualifications</a>
+                        <a href="#gallery"><i class="fa-solid fa-images mr-2 text-emerald-700"></i> Photo Gallery</a>
+                    </div>
+                </div>
+
+                <a href="#announcements" class="hover:text-emerald-700 transition">Announcements</a>
+                <a href="#contact" class="hover:text-emerald-700 transition">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slideshow / Image Slider Section -->
+    <div id="home" class="slider-container">
+        <div class="slide active">
+            <img src="https://i.ibb.co/C3J3m2VP/BC-1.png" alt="School Building">
+            <div class="slide-caption">
+                <h2 class="text-lg sm:text-xl font-bold">Govt. Primary School Jada Chandia</h2>
+                <p class="text-xs sm:text-sm text-gray-200">EMIS Code: 32330121 - Shaping Tomorrow's Leaders</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80" alt="Classroom Learning">
+            <div class="slide-caption">
+                <h2 class="text-lg sm:text-xl font-bold">Quality Activity-Based Learning</h2>
+                <p class="text-xs sm:text-sm text-gray-200">Providing a secure and encouraging environment for students</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80" alt="School Activities">
+            <div class="slide-caption">
+                <h2 class="text-lg sm:text-xl font-bold">Co-curricular & Sports Activities</h2>
+                <p class="text-xs sm:text-sm text-gray-200">Encouraging mental and physical growth</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Sections -->
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- History Section -->
+        <section id="history" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-landmark text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">School History</h2>
+            </div>
+            <p class="text-gray-600 leading-relaxed mb-4">
+                Govt. Primary School Jada Chandia (EMIS Code: 32330121) has been a cornerstone of quality primary education in the region. Established with the mission to impart foundational literacy and moral values to local children, the institution operates under the direct supervision of the Punjab Education Department. Over the years, the school has successfully nurtured thousands of students who have gone on to achieve remarkable heights.
+            </p>
+        </section>
+
+        <!-- Teachers & Qualifications Section -->
+        <section id="teachers" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-chalkboard-user text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">Total Teachers & Qualifications</h2>
+            </div>
+            <p class="text-gray-600 mb-6">Our teaching faculty consists of dedicated, highly qualified, and trained professionals committed to student success.</p>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-emerald-800 text-white text-sm">
+                            <th class="p-3 border">Sr. No</th>
+                            <th class="p-3 border">Teacher Name</th>
+                            <th class="p-3 border">Designation</th>
+                            <th class="p-3 border">Qualification</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm text-gray-700">
+                        <tr>
+                            <td class="p-3 border text-center">1</td>
+                            <td class="p-3 border font-medium">Muhammad Head Teacher</td>
+                            <td class="p-3 border">Head Teacher / PST</td>
+                            <td class="p-3 border">M.A, B.Ed</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 border text-center">2</td>
+                            <td class="p-3 border font-medium">Teacher Name Two</td>
+                            <td class="p-3 border">PST Teacher</td>
+                            <td class="p-3 border">B.Sc, M.Ed</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border text-center">3</td>
+                            <td class="p-3 border font-medium">Teacher Name Three</td>
+                            <td class="p-3 border">PST Teacher</td>
+                            <td class="p-3 border">B.A, PTC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-square-poll-vertical text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">Annual Results & Academic Performance</h2>
+            </div>
+            <p class="text-gray-600 leading-relaxed mb-4">
+                The school consistently maintains an exceptional academic record with a <strong>100% pass rate</strong> in primary board examinations. Students regularly secure top positions in district-level assessments, reflecting the dedication of both the faculty and the students.
+            </p>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section id="gallery" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-images text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">Photo Gallery</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="rounded-xl overflow-hidden shadow h-48">
+                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80" alt="School Campus" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow h-48">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80" alt="Classroom Activity" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow h-48">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80" alt="Students Learning" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+            </div>
+        </section>
+
+        <!-- Announcements Section -->
+        <section id="announcements" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-bullhorn text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">Announcements & Notices</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-lg">
+                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded font-semibold">New</span>
+                    <h4 class="font-bold text-gray-800 mt-2">Mid-Term Exam Schedule</h4>
+                    <p class="text-sm text-gray-600 mt-1">Mid-term examinations will begin next week. Roll number slips have been distributed to all students.</p>
+                </div>
+                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                    <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded font-semibold">Meeting</span>
+                    <h4 class="font-bold text-gray-800 mt-2">Parent-Teacher Meeting</h4>
+                    <p class="text-sm text-gray-600 mt-1">All parents are cordially invited to attend the upcoming PTM this Saturday at 9:00 AM.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer / Contact Us & Feedback Section -->
+    <footer id="contact" class="bg-emerald-950 text-white py-12 px-4 mt-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <!-- Col 1: About Footer -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-yellow-300">Govt. Primary School Jada Chandia</h3>
+                <p class="text-sm text-gray-300 leading-relaxed mb-4">Committed to uplifting community education and empowering children with bright futures.</p>
+                <p class="text-sm text-gray-300"><i class="fa-solid fa-location-dot mr-2 text-yellow-300"></i> Main Jada Chandia, Punjab, Pakistan</p>
+                <p class="text-sm text-gray-300 mt-1"><i class="fa-solid fa-id-badge mr-2 text-yellow-300"></i> EMIS Code: 32330121</p>
+            </div>
+
+            <!-- Col 2: Quick Links & Contact Info -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-yellow-300">Quick Links</h3>
+                <ul class="space-y-2 text-sm text-gray-300 mb-4">
+                    <li><a href="#home" class="hover:underline"><i class="fa-solid fa-chevron-right text-xs mr-1 text-yellow-300"></i> Home</a></li>
+                    <li><a href="#history" class="hover:underline"><i class="fa-solid fa-chevron-right text-xs mr-1 text-yellow-300"></i> School History</a></li>
+                    <li><a href="#teachers" class="hover:underline"><i class="fa-solid fa-chevron-right text-xs mr-1 text-yellow-300"></i> Faculty & Teachers</a></li>
+                    <li><a href="#gallery" class="hover:underline"><i class="fa-solid fa-chevron-right text-xs mr-1 text-yellow-300"></i> Photo Gallery</a></li>
+                </ul>
+                <p class="text-sm text-gray-300"><i class="fa-solid fa-phone mr-2 text-yellow-300"></i> +92 300 1234567</p>
+                <p class="text-sm text-gray-300 mt-1"><i class="fa-solid fa-envelope mr-2 text-yellow-300"></i> school32330121@gov.pk</p>
+            </div>
+
+            <!-- Col 3: Feedback & Advice Form -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-yellow-300"><i class="fa-solid fa-comments mr-2"></i> Give Feedback & Advice</h3>
+                <p class="text-xs text-gray-300 mb-3">Aap ki tajweez ya feedback hamare liye qeemti hai:</p>
+                <form onsubmit="handleFeedback(event)" class="space-y-2.5">
+                    <input type="text" id="feedbackName" placeholder="Aap ka Naam" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                    <textarea id="feedbackText" rows="2" placeholder="Apna message, advice ya feedback yahan likhein..." required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400"></textarea>
+                    <button type="submit" class="w-full bg-yellow-400 text-emerald-950 font-bold py-2 rounded text-xs hover:bg-yellow-300 transition">
+                        Submit Feedback <i class="fa-solid fa-paper-plane ml-1"></i>
+                    </button>
+                </form>
+                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback mil gaya hai.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-emerald-800 pt-6 text-center text-xs text-gray-400">
+            <p>&copy; 2026 Govt. Primary School Jada Chandia (EMIS: 32330121). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Slider & Feedback Scripts -->
+    <script>
+        // Slider Script
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4500);
+
+        // Feedback Form Script
+        function handleFeedback(event) {
+            event.preventDefault();
+            const name = document.getElementById('feedbackName').value;
+            const msgBox = document.getElementById('feedbackMsg');
+            
+            msgBox.innerText = `Shukriya ${name}! Aap ka feedback kamyabi se record ho gaya hai.`;
+            msgBox.classList.remove('hidden');
+            
+            // Form clear kar dein
+            document.getElementById('feedbackName').value = '';
+            document.getElementById('feedbackText').value = '';
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
