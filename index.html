@@ -272,9 +272,34 @@
             </div>
         </section>
 
+        <!-- Global Live Comments Section (Visible to everyone globally) -->
+        <section class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-comments text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-emerald-900">Global Visitor Comments & Reviews</h2>
+            </div>
+            <p class="text-sm text-gray-600 mb-6">Yahan dunya bhar ke visitors apne comments aur reviews chor sakte hain jo sabko live nazar aate hain:</p>
+            
+            <!-- Disqus Universal Code Integration -->
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = window.location.href;  
+                    this.page.identifier = "govt_primary_school_jada_chandia"; 
+                };
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://govt-primary-school-jada-chandia.disqus.com/embed.js'; // Note: Aap Disqus par apna account bana kar yeh link replace kar sakte hain
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || dak = d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_by">comments powered by Disqus.</a></noscript>
+        </section>
+
     </main>
 
-    <!-- Footer / Contact Us & Feedback Wall Section -->
+    <!-- Footer / Contact Us & Email Form Section -->
     <footer id="contact" class="bg-emerald-950 text-white py-12 px-4 mt-16">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <!-- Col 1: About Footer -->
@@ -305,27 +330,19 @@
                 </div>
             </div>
 
-            <!-- Col 3: Feedback Form Connected with your Formspree Link -->
+            <!-- Col 3: Direct Email Form (Formspree Link Connected) -->
             <div>
-                <h3 class="text-lg font-bold mb-3 text-yellow-300"><i class="fa-solid fa-comments mr-2"></i> Give Feedback & Advice</h3>
-                <p class="text-xs text-gray-300 mb-3">Aap ki tajweez ya feedback hamare liye qeemti hai:</p>
+                <h3 class="text-lg font-bold mb-3 text-yellow-300"><i class="fa-solid fa-envelope-circle-check mr-2"></i> Send Direct Message to Email</h3>
+                <p class="text-xs text-gray-300 mb-3">Aap ka paigham seedha hamari email (mugheer14@gmail.com) par pohch jaye ga:</p>
                 
-                <form id="feedbackForm" onsubmit="handleFeedback(event)" action="https://formspree.io/f/mljjagwd" method="POST" class="space-y-2.5">
-                    <input type="text" id="feedbackName" name="name" placeholder="Aap ka Naam" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
-                    <textarea id="feedbackText" name="message" rows="2" placeholder="Apna message, advice ya feedback yahan likhein..." required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400"></textarea>
+                <form action="https://formspree.io/f/mljjagwd" method="POST" class="space-y-2.5">
+                    <input type="text" name="name" placeholder="Aap ka Naam" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                    <input type="email" name="email" placeholder="Aap ki Email Address" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                    <textarea name="message" rows="2" placeholder="Apna message yahan likhein..." required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400"></textarea>
                     <button type="submit" class="w-full bg-yellow-400 text-emerald-950 font-bold py-2 rounded text-xs hover:bg-yellow-300 transition">
-                        Submit Feedback & Email <i class="fa-solid fa-paper-plane ml-1"></i>
+                        Send to Email <i class="fa-solid fa-paper-plane ml-1"></i>
                     </button>
                 </form>
-                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback website par add aur email par send ho gaya hai.</p>
-            </div>
-        </div>
-
-        <!-- Visitor Comments / Testimonials Wall Section -->
-        <div class="max-w-7xl mx-auto border-t border-emerald-800 pt-6 mb-6">
-            <h3 class="text-md font-bold mb-3 text-yellow-300"><i class="fa-solid fa-users-rectangle mr-2"></i> Visitor Reviews & Feedback Wall</h3>
-            <div id="commentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-                <!-- Dynamically added comments will appear here -->
             </div>
         </div>
 
@@ -334,7 +351,7 @@
         </div>
     </footer>
 
-    <!-- Slider, Toggle & Feedback Scripts -->
+    <!-- Slider & Toggle Scripts -->
     <script>
         // Slider Script
         let currentSlide = 0;
@@ -355,87 +372,6 @@
             } else {
                 detailBox.classList.add('hidden');
             }
-        }
-
-        // Load Saved Comments on Page Load
-        window.addEventListener('DOMContentLoaded', loadComments);
-
-        function loadComments() {
-            const commentsList = document.getElementById('commentsList');
-            let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
-            
-            if (comments.length === 0) {
-                comments = [
-                    { name: "Ali Ahmed", text: "Bohat achi school website hai, management ko salam!", date: "2026-06-15" },
-                    { name: "Rashid Minhas", text: "Zabardast portal! School ki tamam maloomat aik hi jagah mil gayi.", date: "2026-07-02" }
-                ];
-            }
-
-            commentsList.innerHTML = '';
-            comments.forEach(c => {
-                const card = document.createElement('div');
-                card.className = "bg-emerald-900 border border-emerald-800 p-3 rounded shadow-sm text-gray-200";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-1 text-yellow-300 font-bold">
-                        <span><i class="fa-solid fa-user-circle mr-1"></i> ${escapeHtml(c.name)}</span>
-                        <span class="text-[10px] text-gray-400">${c.date || ''}</span>
-                    </div>
-                    <p class="text-gray-300 italic">"${escapeHtml(c.text)}"</p>
-                `;
-                commentsList.appendChild(card);
-            });
-        }
-
-        // Feedback Form Script (Saves locally for wall + submits to Formspree for Email)
-// Feedback Form Script (Updated for Instant Wall Display & Email)
-        function handleFeedback(event) {
-            event.preventDefault();
-            const nameInput = document.getElementById('feedbackName');
-            const textInput = document.getElementById('feedbackText');
-            const msgBox = document.getElementById('feedbackMsg');
-            
-            const name = nameInput.value;
-            const text = textInput.value;
-            const currentDate = new Date().toISOString().split('T')[0];
-            const newComment = { name, text, date: currentDate };
-
-            // 1. Save locally and update wall immediately
-            let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
-            comments.unshift(newComment);
-            localStorage.setItem('schoolComments', JSON.stringify(comments));
-            loadComments();
-
-            // 2. Send data to Formspree for Email in background
-            const form = document.getElementById('feedbackForm');
-            const formData = new FormData(form);
-
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if(response.ok) {
-                    msgBox.classList.remove('hidden');
-                    form.reset();
-                    setTimeout(() => {
-                        msgBox.classList.add('hidden');
-                    }, 5000);
-                } else {
-                    alert("Feedback website par add ho gaya hai, lekin email send hone mein koi masla hai.");
-                }
-            }).catch(error => {
-                // Agar offline ya file:// ki wajah se fetch block ho, tab bhi website par show hota rahega
-                msgBox.classList.remove('hidden');
-                form.reset();
-                setTimeout(() => {
-                    msgBox.classList.add('hidden');
-                }, 5000);
-            });
-        }
-
-        // Security helper to prevent HTML injection
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 
