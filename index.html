@@ -387,21 +387,25 @@
         }
 
         // Feedback Form Script (Saves locally for wall + submits to Formspree for Email)
+// Feedback Form Script (Updated for Instant Wall Display & Email)
         function handleFeedback(event) {
             event.preventDefault();
-            const name = document.getElementById('feedbackName').value;
-            const text = document.getElementById('feedbackText').value;
+            const nameInput = document.getElementById('feedbackName');
+            const textInput = document.getElementById('feedbackText');
             const msgBox = document.getElementById('feedbackMsg');
             
+            const name = nameInput.value;
+            const text = textInput.value;
             const currentDate = new Date().toISOString().split('T')[0];
             const newComment = { name, text, date: currentDate };
 
+            // 1. Save locally and update wall immediately
             let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
             comments.unshift(newComment);
             localStorage.setItem('schoolComments', JSON.stringify(comments));
-
             loadComments();
 
+            // 2. Send data to Formspree for Email in background
             const form = document.getElementById('feedbackForm');
             const formData = new FormData(form);
 
@@ -410,13 +414,22 @@
                 body: formData,
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
+                if(response.ok) {
+                    msgBox.classList.remove('hidden');
+                    form.reset();
+                    setTimeout(() => {
+                        msgBox.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    alert("Feedback website par add ho gaya hai, lekin email send hone mein koi masla hai.");
+                }
+            }).catch(error => {
+                // Agar offline ya file:// ki wajah se fetch block ho, tab bhi website par show hota rahega
                 msgBox.classList.remove('hidden');
                 form.reset();
                 setTimeout(() => {
                     msgBox.classList.add('hidden');
                 }, 5000);
-            }).catch(error => {
-                alert("Feedback saved locally, but email dispatch had an error. Please check your internet connection.");
             });
         }
 
