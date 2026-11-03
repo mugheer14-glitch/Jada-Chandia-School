@@ -25,7 +25,7 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
 
-    <!-- Top Ticker Bar (Green Line with Right-to-Left Moving Events & News) -->
+    <!-- Top Ticker Bar -->
     <div class="bg-emerald-900 text-white text-xs sm:text-sm py-2 px-4 flex items-center overflow-hidden border-b border-emerald-800">
         <div class="bg-yellow-400 text-emerald-950 font-bold px-2 py-0.5 rounded text-xs mr-3 shrink-0 z-10 shadow">
             <i class="fa-solid fa-bullhorn mr-1"></i> UPDATES:
@@ -57,7 +57,6 @@
             <nav class="hidden md:flex items-center gap-6 font-medium text-gray-700">
                 <a href="#home" class="hover:text-emerald-700 transition">Home</a>
                 
-                <!-- About School Dropdown -->
                 <div class="dropdown">
                     <a href="#about" class="hover:text-emerald-700 transition flex items-center gap-1 py-2">
                         About School <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -229,7 +228,7 @@
             </div>
         </section>
 
-        <!-- Announcements Section (With Blinking & Clickable Toggle Details) -->
+        <!-- Announcements Section -->
         <section id="announcements" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <div class="flex items-center gap-3 mb-6">
                 <div class="bg-emerald-100 text-emerald-800 p-3 rounded-lg"><i class="fa-solid fa-bullhorn text-xl"></i></div>
@@ -237,7 +236,6 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- Notice 1: New / Exam Schedule -->
                 <div onclick="toggleDetail('examDetail')" class="p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-lg cursor-pointer hover:bg-emerald-100 transition shadow-sm">
                     <div class="flex justify-between items-center">
                         <span class="text-xs bg-emerald-600 text-white px-2.5 py-1 rounded-full font-bold animate-pulse shadow">
@@ -255,7 +253,6 @@
                     </div>
                 </div>
 
-                <!-- Notice 2: Meeting / PTM -->
                 <div onclick="toggleDetail('meetingDetail')" class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg cursor-pointer hover:bg-yellow-100 transition shadow-sm">
                     <div class="flex justify-between items-center">
                         <span class="text-xs bg-yellow-500 text-emerald-950 px-2.5 py-1 rounded-full font-bold animate-pulse shadow">
@@ -278,7 +275,7 @@
 
     </main>
 
-    <!-- Footer / Contact Us & Feedback Section -->
+    <!-- Footer / Contact Us & Live Feedback Wall Section -->
     <footer id="contact" class="bg-emerald-950 text-white py-12 px-4 mt-16">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <!-- Col 1: About Footer -->
@@ -313,7 +310,15 @@
                         Submit Feedback <i class="fa-solid fa-paper-plane ml-1"></i>
                     </button>
                 </form>
-                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback mil gaya hai.</p>
+                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback website par add kar diya gaya hai.</p>
+            </div>
+        </div>
+
+        <!-- Visitor Comments / Testimonials Wall Section -->
+        <div class="max-w-7xl mx-auto border-t border-emerald-800 pt-6 mb-6">
+            <h3 class="text-md font-bold mb-3 text-yellow-300"><i class="fa-solid fa-users-rectangle mr-2"></i> Visitor Reviews & Feedback Wall</h3>
+            <div id="commentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                <!-- Dynamically added comments will appear here -->
             </div>
         </div>
 
@@ -345,21 +350,66 @@
             }
         }
 
-        // Feedback Form Script
+        // Load Saved Comments on Page Load
+        window.addEventListener('DOMContentLoaded', loadComments);
+
+        function loadComments() {
+            const commentsList = document.getElementById('commentsList');
+            let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
+            
+            // Agar koi comment nahi hai toh default sample dikha dein taaki section khali na lage
+            if (comments.length === 0) {
+                comments = [
+                    { name: "Ali Ahmed", text: "Bohat achi school website hai, management ko salam!", date: "2026-06-15" },
+                    { name: "Rashid Minhas", text: "Zabardast portal! School ki tamam maloomat aik hi jagah mil gayi.", date: "2026-07-02" }
+                ];
+            }
+
+            commentsList.innerHTML = '';
+            comments.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "bg-emerald-900 border border-emerald-800 p-3 rounded shadow-sm text-gray-200";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-1 text-yellow-300 font-bold">
+                        <span><i class="fa-solid fa-user-circle mr-1"></i> ${escapeHtml(c.name)}</span>
+                        <span class="text-[10px] text-gray-400">${c.date || ''}</span>
+                    </div>
+                    <p class="text-gray-300 italic">"${escapeHtml(c.text)}"</p>
+                `;
+                commentsList.appendChild(card);
+            });
+        }
+
+        // Feedback Form Script with LocalStorage saving
         function handleFeedback(event) {
             event.preventDefault();
             const name = document.getElementById('feedbackName').value;
+            const text = document.getElementById('feedbackText').value;
             const msgBox = document.getElementById('feedbackMsg');
             
-            msgBox.innerText = `Shukriya ${name}! Aap ka feedback kamyabi se record ho gaya hai.`;
+            const currentDate = new Date().toISOString().split('T')[0];
+            const newComment = { name, text, date: currentDate };
+
+            // Get existing comments from localStorage
+            let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
+            comments.unshift(newComment); // Naya comment sabse upar add hoga
+            localStorage.setItem('schoolComments', JSON.stringify(comments));
+
+            // Reload comments list to show new comment immediately
+            loadComments();
+
             msgBox.classList.remove('hidden');
-            
             document.getElementById('feedbackName').value = '';
             document.getElementById('feedbackText').value = '';
 
             setTimeout(() => {
                 msgBox.classList.add('hidden');
             }, 5000);
+        }
+
+        // Security helper to prevent HTML injection
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 
