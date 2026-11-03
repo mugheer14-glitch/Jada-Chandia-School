@@ -53,7 +53,6 @@
                 </div>
             </div>
             
-            <!-- Navigation Menu -->
             <nav class="hidden md:flex items-center gap-6 font-medium text-gray-700">
                 <a href="#home" class="hover:text-emerald-700 transition">Home</a>
                 
@@ -275,7 +274,7 @@
 
     </main>
 
-    <!-- Footer / Contact Us & Live Feedback Wall Section -->
+    <!-- Footer / Contact Us & Feedback Wall Section -->
     <footer id="contact" class="bg-emerald-950 text-white py-12 px-4 mt-16">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <!-- Col 1: About Footer -->
@@ -296,21 +295,29 @@
                     <li><a href="#gallery" class="hover:underline"><i class="fa-solid fa-chevron-right text-xs mr-1 text-yellow-300"></i> Photo Gallery</a></li>
                 </ul>
                 <p class="text-sm text-gray-300"><i class="fa-solid fa-phone mr-2 text-yellow-300"></i> +92 300 1234567</p>
-                <p class="text-sm text-gray-300 mt-1"><i class="fa-solid fa-envelope mr-2 text-yellow-300"></i> school32330121@gov.pk</p>
+                <p class="text-sm text-gray-300 mt-1"><i class="fa-solid fa-envelope mr-2 text-yellow-300"></i> mugheer14@gmail.com</p>
+                
+                <!-- Direct WhatsApp Button -->
+                <div class="mt-4">
+                    <a href="https://wa.me/923001234567?text=Hello%20Govt%20Primary%20School%20Jada%20Chandia%20Management," target="_blank" class="inline-flex items-center bg-green-600 hover:bg-green-500 text-white font-bold px-3 py-2 rounded text-xs transition shadow">
+                        <i class="fa-brands fa-whatsapp text-sm mr-2"></i> Chat on WhatsApp
+                    </a>
+                </div>
             </div>
 
-            <!-- Col 3: Feedback & Advice Form -->
+            <!-- Col 3: Feedback Form Connected with your Formspree Link -->
             <div>
                 <h3 class="text-lg font-bold mb-3 text-yellow-300"><i class="fa-solid fa-comments mr-2"></i> Give Feedback & Advice</h3>
                 <p class="text-xs text-gray-300 mb-3">Aap ki tajweez ya feedback hamare liye qeemti hai:</p>
-                <form onsubmit="handleFeedback(event)" class="space-y-2.5">
-                    <input type="text" id="feedbackName" placeholder="Aap ka Naam" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
-                    <textarea id="feedbackText" rows="2" placeholder="Apna message, advice ya feedback yahan likhein..." required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400"></textarea>
+                
+                <form id="feedbackForm" onsubmit="handleFeedback(event)" action="https://formspree.io/f/mljjagwd" method="POST" class="space-y-2.5">
+                    <input type="text" id="feedbackName" name="name" placeholder="Aap ka Naam" required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400">
+                    <textarea id="feedbackText" name="message" rows="2" placeholder="Apna message, advice ya feedback yahan likhein..." required class="w-full px-3 py-2 text-xs bg-emerald-900 border border-emerald-800 rounded text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400"></textarea>
                     <button type="submit" class="w-full bg-yellow-400 text-emerald-950 font-bold py-2 rounded text-xs hover:bg-yellow-300 transition">
-                        Submit Feedback <i class="fa-solid fa-paper-plane ml-1"></i>
+                        Submit Feedback & Email <i class="fa-solid fa-paper-plane ml-1"></i>
                     </button>
                 </form>
-                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback website par add kar diya gaya hai.</p>
+                <p id="feedbackMsg" class="text-xs text-yellow-300 mt-2 hidden font-medium">Shukriya! Aap ka feedback website par add aur email par send ho gaya hai.</p>
             </div>
         </div>
 
@@ -357,7 +364,6 @@
             const commentsList = document.getElementById('commentsList');
             let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
             
-            // Agar koi comment nahi hai toh default sample dikha dein taaki section khali na lage
             if (comments.length === 0) {
                 comments = [
                     { name: "Ali Ahmed", text: "Bohat achi school website hai, management ko salam!", date: "2026-06-15" },
@@ -380,7 +386,7 @@
             });
         }
 
-        // Feedback Form Script with LocalStorage saving
+        // Feedback Form Script (Saves locally for wall + submits to Formspree for Email)
         function handleFeedback(event) {
             event.preventDefault();
             const name = document.getElementById('feedbackName').value;
@@ -390,21 +396,28 @@
             const currentDate = new Date().toISOString().split('T')[0];
             const newComment = { name, text, date: currentDate };
 
-            // Get existing comments from localStorage
             let comments = JSON.parse(localStorage.getItem('schoolComments')) || [];
-            comments.unshift(newComment); // Naya comment sabse upar add hoga
+            comments.unshift(newComment);
             localStorage.setItem('schoolComments', JSON.stringify(comments));
 
-            // Reload comments list to show new comment immediately
             loadComments();
 
-            msgBox.classList.remove('hidden');
-            document.getElementById('feedbackName').value = '';
-            document.getElementById('feedbackText').value = '';
+            const form = document.getElementById('feedbackForm');
+            const formData = new FormData(form);
 
-            setTimeout(() => {
-                msgBox.classList.add('hidden');
-            }, 5000);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                msgBox.classList.remove('hidden');
+                form.reset();
+                setTimeout(() => {
+                    msgBox.classList.add('hidden');
+                }, 5000);
+            }).catch(error => {
+                alert("Feedback saved locally, but email dispatch had an error. Please check your internet connection.");
+            });
         }
 
         // Security helper to prevent HTML injection
